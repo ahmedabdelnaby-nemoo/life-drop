@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Drop - نظام التبرع بالدم الذكي</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0e27;
+            color: white;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1f3a 0%, #2d1b3d 100%);
+            padding: 40px 20px;
+            border-bottom: 3px solid #ff0000;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo-section {
+            flex: 0 0 auto;
+        }
+
+        .blood-logo{
+    width:100px;
+    height:100px;
+    background:linear-gradient(135deg,#ff0000,#b30000);
+    position:relative;
+    transform:rotate(45deg);
+    border-radius:20px 50px 50px 50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation:pulse 2s ease-in-out infinite;
+    box-shadow:0 0 30px rgba(255,0,0,0.7);
+}
+
+.blood-logo::before{
+    content:'';
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:linear-gradient(135deg,#ff1a1a,#cc0000);
+    border-radius:50%;
+    top:-50px;
+    left:0;
+}
+
+.blood-logo::after{
+    content:'';
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:linear-gradient(135deg,#ff1a1a,#cc0000);
+    border-radius:50%;
+    top:0;
+    left:-50px;
+}
+
+.heart-icon{
+    position:absolute;
+    transform:rotate(-45deg);
+    font-size:40px;
+    z-index:5;
+    top:25px;
+    left:22px;
+}
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header-text h1 {
+            font-size: 45px;
+            color: #ff0000;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .header-text p {
+            font-size: 18px;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(45, 27, 61, 0.3) 50%, rgba(26, 31, 58, 0.2) 100%);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            font-size: 500px;
+            opacity: 0.03;
+            color: #ff0000;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 50px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+        }
+
+        .hero-description {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 18px 60px;
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            color: white;
+            border: 2px solid #ffffff;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.6);
+            border-color: #ffcccc;
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(45, 27, 61, 0.6) 50%, rgba(26, 31, 58, 0.8) 100%);
+            border: 3px solid rgba(255, 0, 0, 0.3);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '🩸';
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            font-size: 250px;
+            opacity: 0.05;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .features::after {
+            content: '❤️';
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            font-size: 200px;
+            opacity: 0.05;
+            animation: float 7s ease-in-out infinite reverse;
+        }
+
+        .section-title {
+            font-size: 42px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0000, #ff6b6b, #ff0000);
+            margin: 20px auto 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 240, 255, 0.9) 100%);
+            border: 3px solid #ff0000;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.7s ease;
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            border-color: #ff0000;
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(255, 0, 0, 0.4);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 240, 245, 0.95) 100%);
+        }
+
+        .feature-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature-card h3 {
+            font-size: 26px;
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.8;
+        }
+
+        /* Statistics Section */
+        .stats {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d1b3d 100%);
+            padding: 100px 20px;
+            margin: 80px 0;
+            border: 3px solid #ff0000;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '🩸';
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            font-size: 300px;
+            opacity: 0.08;
+            transform: translateY(-50%);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .stats::after {
+            content: '❤️';
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            font-size: 200px;
+            opacity: 0.08;
+            animation: float 5s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(255, 0, 0, 0.05) 100%);
+            padding: 40px 30px;
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+            z-index: 0;
+        }
+
+        .stat-item:hover::before {
+            left: 100%;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(255, 0, 0, 0.4);
+            border-color: rgba(255, 0, 0, 0.9);
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.25) 0%, rgba(255, 0, 0, 0.1) 100%);
+        }
+
+        .stat-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .stat-item h4 {
+            font-size: 56px;
+            background: linear-gradient(135deg, #ff0000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 0, 0, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+            border: 2px solid rgba(255, 0, 0, 0.2);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.05) 100%);
+            border: 3px solid #ff0000;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+            top: 50%;
+            right: 50%;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(255, 0, 0, 0.5);
+            border-color: rgba(255, 0, 0, 0.9);
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(255, 0, 0, 0.08) 100%);
+        }
+
+        .gallery-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .gallery-item h3 {
+            font-size: 24px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .gallery-item p {
+            font-size: 16px;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a1f3a 0%, #2d1b3d 100%);
+            padding: 50px 20px;
+            border-top: 4px solid #ff0000;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 0, 0, 0.1) 0%, transparent 50%, rgba(255, 0, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        footer p {
+            color: #cccccc;
+            font-size: 15px;
+            margin: 10px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer strong {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 35px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+        <div class="logo-section">
+
+    <div class="blood-logo">
+        <div class="heart-icon">🤍</div>
+    </div>
+
+</div>
+            </div>
+            <div class="header-text">
+                <h1>Life Drop</h1>
+                <p>نظام التبرع بالدم الذكي | Smart Blood Donation System</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>🩸 أنقذ الأرواح، تبرع بالحب</h2>
+            <p class="hero-description">
+                نحن نربط المتبرعين بالمحتاجين من خلال نظام ذكي وآمن
+            </p>
+            <p class="hero-description" style="font-size: 16px; color: #999;">
+                Save lives through smart blood donation - Connecting donors with those in need
+            </p>
+            <a href="/donors">
+                <button class="hero-cta">← ابدأ التسجيل الآن</button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">المميزات الرئيسية</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>أمان عالي</h3>
+                <p>بيانات آمنة وموثوقة تماماً. حماية كاملة لخصوصيتك.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>سرعة البحث</h3>
+                <p>ابحث عن المتبرعين في ثوانٍ معدودة من منطقتك.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>شبكة عالمية</h3>
+                <p>متصل مع مستشفيات وبنوك دم حول العالم.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>سهولة الاستخدام</h3>
+                <p>واجهة بسيطة وسهلة الاستخدام لجميع الأعمار.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏥</div>
+                <h3>موثوق من المستشفيات</h3>
+                <p>معتمد من قبل أكبر المستشفيات والمؤسسات الصحية.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💚</div>
+                <h3>مساهمة حقيقية</h3>
+                <p>ساهم في إنقاذ الأرواح وتغيير المجتمع.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats">
+        <div class="stats-content">
+            <div class="stat-item">
+                <span class="stat-icon">👥</span>
+                <h4>50,000+</h4>
+                <p>متبرع نشط</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">❤️</span>
+                <h4>1M+</h4>
+                <p>حياة تم إنقاذها</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🏥</span>
+                <h4>150+</h4>
+                <p>مستشفى موثوق</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">⏰</span>
+                <h4>24/7</h4>
+                <p>خدمة متواصلة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <h2 class="section-title">خدماتنا الأساسية</h2>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-icon">🩹</div>
+                <h3>تسجيل المتبرعين</h3>
+                <p>تسجيل آمن وسريع لكل متبرع جديد مع كل بياناته الطبية الهامة.</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-icon">🔍</div>
+                <h3>البحث الذكي</h3>
+                <p>ابحث عن المتبرعين حسب فصيلة الدم والموقع والتوفر.</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-icon">📞</div>
+                <h3>التواصل المباشر</h3>
+                <p>اتصل مباشرة مع المتبرعين والمحتاجين دون وسيط.</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-icon">📊</div>
+                <h3>تقارير وإحصائيات</h3>
+                <p>تتبع إحصائيات التبرعات والمساهمات والنشاط.</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-icon">🏆</div>
+                <h3>مكافآت المتبرعين</h3>
+                <p>احصل على مكافآت وشهادات تقدير لكل تبرع ناجح.</p>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-icon">💬</div>
+                <h3>دعم العملاء</h3>
+                <p>فريق دعم متاح 24/7 للإجابة على جميع استفساراتك.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>© 2026 Life Drop</strong> - نظام التبرع بالدم الذكي</p>
+        <p>Smart Blood Donation System | Saving Lives Around the World</p>
+        <p>🌍 تابعنا على جميع المنصات | Follow us on all platforms</p>
+    </footer>
+
+</body>
+
+</html>

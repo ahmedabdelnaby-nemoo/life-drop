@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تسجيل متبرع - Life Drop</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
+            direction: rtl;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Logo Background */
+        .logo-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .logo-background-text {
+            font-size: 300px;
+            color: #ff0000;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .logo-background-subtitle {
+            position: absolute;
+            font-size: 60px;
+            color: #ffffff;
+            margin-top: -100px;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff0000;
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #ff0000;
+            margin-bottom: 8px;
+            font-size: 40px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #ff6b6b;
+            font-style: italic;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #cccccc;
+            margin-top: 10px;
+        }
+
+        /* Form */
+        form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            text-align: right;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 14px;
+            width: 100%;
+            margin-bottom: 5px;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            transform: scale(1.02);
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        .helper-text {
+            font-size: 13px;
+            color: #999;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 14px 40px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #cc0000;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .footer-text {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            font-size: 14px;
+            color: #888;
+        }
+
+        .footer-text strong {
+            color: #ff0000;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Logo Background -->
+    <div class="logo-background">
+        <div class="logo-background-text">🩸</div>
+        <div class="logo-background-subtitle">LIFE DROP</div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="container">
+        <div class="header">
+            <div class="logo-icon">🩸</div>
+            <h1>تسجيل متبرع</h1>
+            <div class="subtitle">Register as a Donor</div>
+            <div class="tagline">نظام التبرع بالدم الذكي - Smart Blood Donation System</div>
+        </div>
+
+        <form action="/save" method="POST">
+
+            <div class="form-group">
+                <label for="name">الاسم الكامل</label>
+                <input type="text" id="name" name="name" placeholder="أدخل اسمك الكامل" required>
+                <div class="helper-text">Full Name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="blood">فصيلة الدم</label>
+                <input type="text" id="blood" name="blood" placeholder="مثال: O+, AB-, B+" required>
+                <div class="helper-text">Blood Type (e.g., O+, AB-, B+)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">المدينة</label>
+                <input type="text" id="city" name="city" placeholder="أدخل مدينتك" required>
+                <div class="helper-text">City / Region</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="text" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required>
+                <div class="helper-text">Phone Number</div>
+            </div>
+
+            <button type="submit">
+                تسجيل متبرع جديد 🩸
+            </button>
+
+        </form>
+
+        <div class="footer-text">
+            <strong>Life Drop</strong> - نظام التبرع بالدم الذكي<br>
+            Smart Blood Donation System
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Donors</title>
+
+    <style>
+
+        body{
+            background:#111;
+            color:white;
+            font-family:Arial;
+            text-align:center;
+        }
+
+        h1{
+            color:red;
+            margin-top:30px;
+        }
+
+        table{
+            width:80%;
+            margin:auto;
+            margin-top:30px;
+            border-collapse:collapse;
+        }
+
+        th, td{
+            border:1px solid white;
+            padding:15px;
+        }
+
+        th{
+            background:red;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>🩸 All Donors</h1>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Blood Type</th>
+            <th>City</th>
+            <th>Phone</th>
+        </tr>
+
+        {% for donor in donors %}
+
+        <tr>
+            <td>{{ donor[0] }}</td>
+            <td>{{ donor[1] }}</td>
+            <td>{{ donor[2] }}</td>
+            <td>{{ donor[3] }}</td>
+            <td>{{ donor[4] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
