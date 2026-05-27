@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Drop - تبرع بالدم، أنقذ حياة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+        }
+
+        .splash-container {
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo-wrapper {
+            margin-bottom: 40px;
+            animation: slideUp 1.5s ease-out 0.3s both;
+        }
+
+        .logo-wrapper img {
+            max-width: 300px;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(255, 0, 0, 0.3));
+        }
+
+        .brand-title {
+            font-size: 48px;
+            color: #fff;
+            margin: 30px 0 15px;
+            animation: slideUp 1.5s ease-out 0.6s both;
+            letter-spacing: 2px;
+        }
+
+        .brand-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 40px;
+            animation: slideUp 1.5s ease-out 0.9s both;
+        }
+
+        .loading-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 50px;
+            animation: slideUp 1.5s ease-out 1.2s both;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.6;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .brand-title {
+                font-size: 36px;
+            }
+
+            .logo-wrapper img {
+                max-width: 200px;
+            }
+
+            .brand-subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <div class="logo-wrapper">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Life Drop Logo">
+        </div>
+        <h1 class="brand-title">Life Drop</h1>
+        <p class="brand-subtitle">تبرع بالدم، أنقذ حياة</p>
+        <div class="loading-indicator">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        // تحويل تلقائي إلى صفحة التسجيل بعد 3 ثوان
+        setTimeout(() => {
+            window.location.href = '/donors';
+        }, 3000);
+    </script>
+</body>
+</html>
