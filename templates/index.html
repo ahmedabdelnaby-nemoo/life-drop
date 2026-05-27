@@ -18,9 +18,10 @@
             color: white;
             direction: rtl;
             overflow-x: hidden;
+            /* تم إصلاح السطر بالأسفل وحذف وسم الـ style الداخلي لتجنب قفل التنسيق مبكراً */
             background-image: 
                 radial-gradient(circle at center, rgba(255, 0, 0, 0.08) 0%, transparent 70%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><style>.drop{fill:none;stroke:%23ff0000;stroke-width:2;opacity:0.12;}</style></defs><path class="drop" d="M100,20 Q80,60 80,90 Q80,130 100,160 Q120,130 120,90 Q120,60 100,20 Z"/><line class="drop" x1="80" y1="85" x2="120" y2="85"/><line class="drop" x1="75" y1="100" x2="125" y2="100"/><line class="drop" x1="75" y1="115" x2="125" y2="115"/></svg>');
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="none" stroke="%23ff0000" stroke-width="2" opacity="0.12" d="M100,20 Q80,60 80,90 Q80,130 100,160 Q120,130 120,90 Q120,60 100,20 Z"/><line fill="none" stroke="%23ff0000" stroke-width="2" opacity="0.12" x1="80" y1="85" x2="120" y2="85"/><line fill="none" stroke="%23ff0000" stroke-width="2" opacity="0.12" x1="75" y1="100" x2="125" y2="100"/><line fill="none" stroke="%23ff0000" stroke-width="2" opacity="0.12" x1="75" y1="115" x2="125" y2="115"/></svg>');
             background-attachment: fixed;
             background-position: center;
             background-repeat: repeat;
@@ -500,7 +501,6 @@
 
 <body>
 
-    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo-section">
@@ -513,7 +513,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h2>🩸 أنقذ الأرواح، تبرع بالحب</h2>
@@ -529,7 +528,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features">
         <h2 class="section-title">المميزات الرئيسية</h2>
         
@@ -572,7 +570,6 @@
         </div>
     </section>
 
-    <!-- Statistics Section -->
     <section class="stats">
         <div class="stats-content">
             <div class="stat-item">
@@ -598,7 +595,6 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
     <section class="gallery">
         <h2 class="section-title">خدماتنا الأساسية</h2>
         
@@ -641,7 +637,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p><strong>© 2026 Life Drop</strong> - نظام التبرع بالدم الذكي</p>
         <p>Smart Blood Donation System | Saving Lives Around the World</p>
@@ -649,5 +644,4 @@
     </footer>
 
 </body>
-
 </html>
