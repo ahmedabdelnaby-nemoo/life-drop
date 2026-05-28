@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="5;url=/donors?from=splash">
     <title>Life Drop - تبرع بالدم، أنقذ حياة</title>
+    <link rel="preload" as="image" href="{{ url_for('static', filename='life-drop.png') }}">
     <style>
         * {
             margin: 0;
@@ -29,12 +31,31 @@
         .logo-wrapper {
             margin-bottom: 40px;
             animation: slideUp 1.5s ease-out 0.3s both;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-wrapper img {
             max-width: 300px;
             height: auto;
             filter: drop-shadow(0 10px 30px rgba(255, 0, 0, 0.3));
+        }
+
+        .logo-fallback {
+            display: none;
+            font-size: 120px;
+            line-height: 1;
+            filter: drop-shadow(0 10px 30px rgba(255, 0, 0, 0.3));
+        }
+
+        .logo-wrapper.fallback-active img {
+            display: none;
+        }
+
+        .logo-wrapper.fallback-active .logo-fallback {
+            display: block;
         }
 
         .brand-title {
@@ -77,12 +98,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
@@ -108,24 +125,23 @@
         }
 
         @media (max-width: 600px) {
-            .brand-title {
-                font-size: 36px;
-            }
-
-            .logo-wrapper img {
-                max-width: 200px;
-            }
-
-            .brand-subtitle {
-                font-size: 16px;
-            }
+            .brand-title { font-size: 36px; }
+            .logo-wrapper img { max-width: 200px; }
+            .logo-fallback { font-size: 80px; }
+            .brand-subtitle { font-size: 16px; }
         }
     </style>
 </head>
 <body>
     <div class="splash-container">
-        <div class="logo-wrapper">
-            <img src="{{ url_for('static', filename='life-drop.png') }}" alt="Life Drop Logo">
+        <div class="logo-wrapper" id="logoWrapper">
+            <img
+                id="splashLogo"
+                src="{{ url_for('static', filename='life-drop.png') }}"
+                alt="Life Drop Logo"
+                onerror="document.getElementById('logoWrapper').classList.add('fallback-active')"
+            >
+            <div class="logo-fallback" aria-hidden="true">🩸</div>
         </div>
         <h1 class="brand-title">Life Drop</h1>
         <p class="brand-subtitle">تبرع بالدم، أنقذ حياة</p>
@@ -137,10 +153,36 @@
     </div>
 
     <script>
-        // تحويل تلقائي إلى صفحة التسجيل بعد 4 ثوان
-        setTimeout(function() {
-            window.location.href = '/donors';
-        }, 4000);
+        (function () {
+            var DONORS_URL = '/donors?from=splash';
+            var MIN_DISPLAY_MS = 3500;
+            var MAX_WAIT_MS = 6000;
+            var redirected = false;
+
+            function goToDonors() {
+                if (redirected) return;
+                redirected = true;
+                window.location.replace(DONORS_URL);
+            }
+
+            var logo = document.getElementById('splashLogo');
+            var started = Date.now();
+
+            function scheduleRedirect() {
+                var elapsed = Date.now() - started;
+                var delay = Math.max(0, MIN_DISPLAY_MS - elapsed);
+                setTimeout(goToDonors, delay);
+            }
+
+            if (logo.complete) {
+                scheduleRedirect();
+            } else {
+                logo.addEventListener('load', scheduleRedirect);
+                logo.addEventListener('error', scheduleRedirect);
+            }
+
+            setTimeout(goToDonors, MAX_WAIT_MS);
+        })();
     </script>
 </body>
 </html>

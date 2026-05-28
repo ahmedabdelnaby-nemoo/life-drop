@@ -1,40 +1,57 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, make_response
 import sqlite3
 import os
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 
-# Splash Page - Logo
+SPLASH_CACHE_HEADERS = {
+    'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+    'Pragma': 'no-cache',
+}
+
+
+def _no_cache(response):
+    for key, value in SPLASH_CACHE_HEADERS.items():
+        response.headers[key] = value
+    return response
+
+
+# Splash Page - Logo (always first when opening the site root)
 @app.route('/')
 def home():
-    return render_template("splash.html")
+    response = make_response(render_template('splash.html'))
+    return _no_cache(response)
 
-# Main Registration Page
+
+# Main landing page
 @app.route('/index')
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
+
+
+# Donors registration — only after splash redirect
+@app.route('/donors')
+def donors():
+    if request.args.get('from') != 'splash':
+        return redirect('/')
+    return render_template('donors.html')
+
 
 # Show All Donors
 @app.route('/show')
 def show():
-
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM donors")
-    donors = cursor.fetchall()
+    cursor.execute('SELECT * FROM donors')
+    donors_list = cursor.fetchall()
     conn.close()
-    return render_template("show.html", donors=donors)
+    return render_template('show.html', donors=donors_list)
 
-# Donors Page
-@app.route('/donors')
-def donors():
-    return render_template("donors.html")
 
 # Save Donor
 @app.route('/save', methods=['POST'])
 def save():
-
     name = request.form['name']
     blood = request.form['blood']
     city = request.form['city']
@@ -60,8 +77,9 @@ def save():
     conn.commit()
     conn.close()
 
-    return render_template("success.html")
+    return render_template('success.html')
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False)
