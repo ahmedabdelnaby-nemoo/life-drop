@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import sqlite3
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 # Splash Page - Logo
 @app.route('/')
