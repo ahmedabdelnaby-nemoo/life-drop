@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Lifr Drop",
+			"path": ".."
+		},
+		{
+			"name": "quiz",
+			"path": "../../quiz"
+		}
+	],
+	"settings": {}
+}
