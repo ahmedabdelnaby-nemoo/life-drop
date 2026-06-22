@@ -215,7 +215,7 @@
             <div class="tagline">نظام التبرع بالدم الذكي - Smart Blood Donation System</div>
         </div>
 
-        <form action="/save" method="POST">
+        <form action="/save" method="POST" id="donor-form">
 
             <div class="form-group">
                 <label for="name">الاسم الكامل</label>
@@ -252,6 +252,46 @@
             Smart Blood Donation System
         </div>
     </div>
+
+    <script>
+        const STORAGE_KEY = 'lifedrop_donor_draft';
+        const form = document.getElementById('donor-form');
+        const fields = ['name', 'blood', 'city', 'phone'];
+
+        function saveDraft() {
+            const data = {};
+            fields.forEach(function (id) {
+                data[id] = document.getElementById(id).value;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadDraft() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            try {
+                const data = JSON.parse(saved);
+                fields.forEach(function (id) {
+                    if (data[id]) {
+                        document.getElementById(id).value = data[id];
+                    }
+                });
+            } catch (e) {
+                localStorage.removeItem(STORAGE_KEY);
+            }
+        }
+
+        fields.forEach(function (id) {
+            document.getElementById(id).addEventListener('input', saveDraft);
+        });
+
+        form.addEventListener('submit', function () {
+            localStorage.removeItem(STORAGE_KEY);
+        });
+
+        loadDraft();
+    </script>
 
 </body>
 

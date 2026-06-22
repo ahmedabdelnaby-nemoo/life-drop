@@ -30,10 +30,11 @@ def index():
     return render_template('index.html')
 
 
-# Donors registration — only after splash redirect
+# Donors registration — after splash, landing page, or success screen
 @app.route('/donors')
 def donors():
-    if request.args.get('from') != 'splash':
+    allowed_sources = ('splash', 'index', 'success')
+    if request.args.get('from') not in allowed_sources:
         return redirect('/')
     return render_template('donors.html')
 
