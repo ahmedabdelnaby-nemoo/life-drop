@@ -25,3 +25,5 @@ wheels/
 database.db
 
 database.db
+
+venv/
